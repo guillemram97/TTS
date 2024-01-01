@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torch.nn import Conv1d
 from torch.nn import functional as F
-from torch.nn.utils.parametrizations import weight_norm
+from torch.nn.utils import weight_norm
 from torch.nn.utils.parametrize import remove_parametrizations
 
 import TTS.vc.modules.freevc.commons as commons
@@ -126,7 +126,7 @@ class WN(torch.nn.Module):
             in_layer = torch.nn.Conv1d(
                 hidden_channels, 2 * hidden_channels, kernel_size, dilation=dilation, padding=padding
             )
-            in_layer = torch.nn.utils.parametrizations.weight_norm(in_layer, name="weight")
+            in_layer = weight_norm(in_layer, name="weight")
             self.in_layers.append(in_layer)
 
             # last one is not necessary
